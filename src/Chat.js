@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Chat.css";
 import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import { IconButton } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice.js";
 
 function Chat() {
   const [input, setInput] = useState("");
@@ -12,6 +14,8 @@ function Chat() {
 
     // Firebase Magic...
   };
+
+  const user = useSelector(selectUser);
 
   return (
     <div className="chat">
