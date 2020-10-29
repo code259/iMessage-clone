@@ -6,6 +6,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice.js";
+import { auth } from "./firebase";
 
 function Sidebar() {
   const user = useSelector(selectUser);
@@ -13,7 +14,11 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__navbar">
-        <Avatar className="sidebar__avatar" src={user.photo} />
+        <Avatar
+          onClick={() => auth.signOut()}
+          className="sidebar__avatar"
+          src={user.photo}
+        />
         <div className="sidebar__input">
           <SearchIcon />
           <input placeholder="Search" />
