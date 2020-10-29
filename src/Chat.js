@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Chat.css";
+import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
+import { IconButton } from "@material-ui/core";
 
 function Chat() {
   const [input, setInput] = useState("");
@@ -21,6 +23,16 @@ function Chat() {
         <strong>Details</strong>
       </div>
       {/* Chat Messages*/}
+      <div className="chat__messages">
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+        <h2>I am a message for testing</h2>
+      </div>
       {/* Chat Input*/}
       <div className="chat__input">
         <form>
@@ -32,6 +44,10 @@ function Chat() {
           />
           <button onClick={sendMessage}>Send Message</button>
         </form>
+
+        <IconButton>
+          <MicNoneOutlinedIcon className="chat__mic" />
+        </IconButton>
       </div>
     </div>
   );
