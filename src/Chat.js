@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 
 function Chat() {
+  const [input, setInput] = useState("");
   const sendMessage = (e) => {
     e.preventDefault();
+
+    setInput("");
 
     // Firebase Magic...
   };
@@ -21,7 +24,12 @@ function Chat() {
       {/* Chat Input*/}
       <div className="chat__input">
         <form>
-          <input type="text" placeholder="iMessage" />
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            type="text"
+            placeholder="iMessage"
+          />
           <button onClick={sendMessage}>Send Message</button>
         </form>
       </div>
