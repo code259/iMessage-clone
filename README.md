@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+This project is being constantly updated and it is still in development stage now . Backend will be implemented soon and Ui is still to be done . With many other cool features like : notifications , google sign in , apple sign in and more !
+
 ## Available Scripts
 
 In the project directory, you can run:
