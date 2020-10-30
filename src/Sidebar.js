@@ -7,6 +7,7 @@ import RateReviewOutlinedIcon from "@material-ui/icons/RateReviewOutlined";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice.js";
 import db, { auth } from "./firebase";
+import { selectChat } from "./features/chatSlice.js";
 import { useState } from "react";
 import { useEffect } from "react";
 

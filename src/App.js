@@ -10,7 +10,7 @@ import { auth } from "./firebase";
 // Apple Sign In
 // Popup window when adding new chat , instead of prompt .
 // Delete Chat option
-// Fix data base thing , like when I refresh it disappears
+// New messages come from bottom , change desc to asc in chat.js and change the forwardRef thing to the downward one ( google this)
 
 function App() {
   const user = useSelector(selectUser);
@@ -32,6 +32,7 @@ function App() {
         // User is logged out
         dispatch(logout());
       }
+      console.log(authUser.email + ":" + authUser.photoURL);
     });
   }, []);
 
