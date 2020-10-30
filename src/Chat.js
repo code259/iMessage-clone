@@ -4,38 +4,65 @@ import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import { IconButton } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice.js";
+import Message from "./Message";
+import { selectChatName, selectChatId } from "./features/chatSlice";
+import db from "./firebase";
+import { useEffect } from "react";
+import firebase from "firebase";
 
 function Chat() {
+  const user = useSelector(selectUser);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const chatName = useSelector(selectChatName);
+  const chatId = useSelector(selectChatId);
+
+  useEffect(() => {
+    if (chatId) {
+      db.collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) =>
+          setMessages(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          )
+        );
+    }
+  }, [chatId]);
+
   const sendMessage = (e) => {
     e.preventDefault();
 
     setInput("");
 
-    // Firebase Magic...
+    db.collection("chats").doc(chatId).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      uid: user.uid,
+      photo: user.photoURL,
+      email: user.email,
+      displayName: user.displayName,
+    });
   };
-
-  const user = useSelector(selectUser);
 
   return (
     <div className="chat">
       {/* Chat Navbar*/}
       <div className="chat__navbar">
         <h4>
-          To: <span className="chat__name">Channel Name</span>
+          To: <span className="chat__name">{chatName}</span>
         </h4>
         <strong>Details</strong>
       </div>
       {/* Chat Messages*/}
       <div className="chat__messages">
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
-        <h2>I am a message for testing</h2>
+        {messages.map(({ id, data }) => (
+          <Message key={id} contents={data} />
+        ))}
       </div>
       {/* Chat Input*/}
       <div className="chat__input">

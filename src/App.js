@@ -6,6 +6,12 @@ import { selectUser, login, logout } from "./features/userSlice";
 import Login from "./Login";
 import { auth } from "./firebase";
 
+// Additions on Clever Programming build :
+// Apple Sign In
+// Popup window when adding new chat , instead of prompt .
+// Delete Chat option
+// Fix data base thing , like when I refresh it disappears
+
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -17,7 +23,7 @@ function App() {
         dispatch(
           login({
             uid: authUser.uid,
-            photo: authUser.photoURL,
+            photoURL: authUser.photoURL,
             email: authUser.email,
             displayName: authUser.displayName,
           })
